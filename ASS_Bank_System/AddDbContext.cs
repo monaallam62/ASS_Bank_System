@@ -17,6 +17,7 @@ namespace ASS_Bank_System
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            #region Relations
             modelBuilder.Entity<Branch>(BR =>
             {
                 BR.HasKey(B => B.Code);
@@ -31,7 +32,7 @@ namespace ASS_Bank_System
                 A.HasKey(AC => AC.AccountNumber);
                 A.HasOne(AC => AC.Branch)
                      .WithMany(B => B.Accounts)
-                     .HasForeignKey(AC=>AC.BranchCode);
+                     .HasForeignKey(AC => AC.BranchCode);
             });
 
             modelBuilder.Entity<Transaction>(TR =>
@@ -55,6 +56,19 @@ namespace ASS_Bank_System
                 .HasForeignKey(ca => ca.CustomerId);
             });
 
+            #endregion
+            #region Seeding
+            modelBuilder.Entity<Branch>().HasData(
+                new Branch { Code = "B01", Name = "Main Branch", Address = "Cairo", PhoneNumber = "01242063325" },
+                new Branch { Code = "Z02", Name = "Z02 Branch", Address = "Alex", PhoneNumber = "01023046981" }
+                );
+
+            modelBuilder.Entity<Manager>().HasData(
+                new Manager { ManagerId = 1, FullName = "Ahmed", PhoneNumber = "01242063325", HireDate = DateTime.Now, BranchCode = "B01" },
+                new Manager { ManagerId = 2, FullName = "Mohamed", PhoneNumber = "01023046981", HireDate = DateTime.Now, BranchCode = "Z02" },
+                new Manager { ManagerId = 3, FullName = "Ali", PhoneNumber = "01142357535", HireDate = DateTime.Now, BranchCode = "A03" }
+                );
+            #endregion
 
         }
 
