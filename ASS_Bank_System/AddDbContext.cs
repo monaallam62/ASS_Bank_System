@@ -21,8 +21,8 @@ namespace ASS_Bank_System
             {
                 BR.HasKey(B => B.Code);
                 BR.HasOne(B => B.Manager)
-                     .WithOne(M => M.Branchs)
-                     .HasForeignKey<Manager>(M => M.ManagerId);
+                     .WithOne(M => M.Branch)
+                     .HasForeignKey<Manager>(M => M.BranchCode);
 
             });
 
