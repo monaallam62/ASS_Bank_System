@@ -14,6 +14,7 @@ namespace ASS_Bank_System.Models
         public string PhoneNumber { get; set; }
         public DateTime HireDate { get; set; }
 
-        public Branch Branchs { get; set; }
+        public string BranchCode { get; set; }
+        public Branch Branch { get; set; }
     }
 }
