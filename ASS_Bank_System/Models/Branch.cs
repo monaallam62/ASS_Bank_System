@@ -13,7 +13,7 @@ namespace ASS_Bank_System.Models
         public string? Address { get; set; }
         public string PhoneNumber { get; set; }
 
-        public Manger Manger { get; set; }
+        public Manager Manager { get; set; }
 
         public ICollection<Account>? Accounts { get; set; }
     }
