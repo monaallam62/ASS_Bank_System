@@ -3,10 +3,12 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace ASS_Bank_System.Migrations
 {
     /// <inheritdoc />
-    public partial class BankSystem : Migration
+    public partial class BookSystem : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -137,6 +139,39 @@ namespace ASS_Bank_System.Migrations
                         principalColumn: "AccountNumber",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Branchs",
+                columns: new[] { "Code", "Address", "Name", "PhoneNumber" },
+                values: new object[,]
+                {
+                    { "A01", "Cairo", "Main Branch", "01242063325" },
+                    { "Z02", "Alex", "Z02 Branch", "01023046981" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Customers",
+                columns: new[] { "CustomerId", "Address", "CustomerType", "DateOfBirth", "Email", "FullName", "NationalId", "PhoneNumber" },
+                values: new object[] { 1, "Tanta", "Individual", new DateTime(2000, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "mona@mail.com", "Mona Mohamed", "12345678901234", "01012345678" });
+
+            migrationBuilder.InsertData(
+                table: "Accounts",
+                columns: new[] { "AccountNumber", "AccountType", "BranchCode", "CurrentBalance", "OpeningDate" },
+                values: new object[] { "A1001", "Savings", "Z02", 5000m, new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "Managers",
+                columns: new[] { "ManagerId", "BranchCode", "Email", "FullName", "HireDate", "PhoneNumber" },
+                values: new object[,]
+                {
+                    { 1, "A01", "Ahmed@mail.com", "Ahmed", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01242063325" },
+                    { 2, "Z02", "Mohamed@mail.com", "Mohamed", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "01023046981" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "CustomerAccount",
+                columns: new[] { "AccountNumber", "CustomerId", "AccountStatus", "OwnershipStartDate", "OwnershipType" },
+                values: new object[] { "A1001", 1, "Active", new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Primary" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Accounts_BranchCode",

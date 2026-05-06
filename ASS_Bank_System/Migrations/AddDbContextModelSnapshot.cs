@@ -46,6 +46,16 @@ namespace ASS_Bank_System.Migrations
                     b.HasIndex("BranchCode");
 
                     b.ToTable("Accounts");
+
+                    b.HasData(
+                        new
+                        {
+                            AccountNumber = "A1001",
+                            AccountType = "Savings",
+                            BranchCode = "Z02",
+                            CurrentBalance = 5000m,
+                            OpeningDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("ASS_Bank_System.Models.Branch", b =>
@@ -67,6 +77,22 @@ namespace ASS_Bank_System.Migrations
                     b.HasKey("Code");
 
                     b.ToTable("Branchs");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = "A01",
+                            Address = "Cairo",
+                            Name = "Main Branch",
+                            PhoneNumber = "01242063325"
+                        },
+                        new
+                        {
+                            Code = "Z02",
+                            Address = "Alex",
+                            Name = "Z02 Branch",
+                            PhoneNumber = "01023046981"
+                        });
                 });
 
             modelBuilder.Entity("ASS_Bank_System.Models.Customer", b =>
@@ -107,6 +133,19 @@ namespace ASS_Bank_System.Migrations
                     b.HasKey("CustomerId");
 
                     b.ToTable("Customers");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            Address = "Tanta",
+                            CustomerType = "Individual",
+                            DateOfBirth = new DateTime(2000, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Email = "mona@mail.com",
+                            FullName = "Mona Mohamed",
+                            NationalId = "12345678901234",
+                            PhoneNumber = "01012345678"
+                        });
                 });
 
             modelBuilder.Entity("ASS_Bank_System.Models.CustomerAccount", b =>
@@ -133,6 +172,16 @@ namespace ASS_Bank_System.Migrations
                     b.HasIndex("AccountNumber");
 
                     b.ToTable("CustomerAccount");
+
+                    b.HasData(
+                        new
+                        {
+                            CustomerId = 1,
+                            AccountNumber = "A1001",
+                            AccountStatus = "Active",
+                            OwnershipStartDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            OwnershipType = "Primary"
+                        });
                 });
 
             modelBuilder.Entity("ASS_Bank_System.Models.Manager", b =>
@@ -168,6 +217,26 @@ namespace ASS_Bank_System.Migrations
                         .IsUnique();
 
                     b.ToTable("Managers");
+
+                    b.HasData(
+                        new
+                        {
+                            ManagerId = 1,
+                            BranchCode = "A01",
+                            Email = "Ahmed@mail.com",
+                            FullName = "Ahmed",
+                            HireDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PhoneNumber = "01242063325"
+                        },
+                        new
+                        {
+                            ManagerId = 2,
+                            BranchCode = "Z02",
+                            Email = "Mohamed@mail.com",
+                            FullName = "Mohamed",
+                            HireDate = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            PhoneNumber = "01023046981"
+                        });
                 });
 
             modelBuilder.Entity("ASS_Bank_System.Models.Transaction", b =>
