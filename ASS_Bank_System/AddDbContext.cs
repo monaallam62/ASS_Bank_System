@@ -12,7 +12,7 @@ namespace ASS_Bank_System
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=.\SQL2026;Database=BankSys;Trusted_Connection=True;TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer(@"Server=.\SQL2026;Database=BankSystem;Trusted_Connection=True;TrustServerCertificate=True;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -59,15 +59,33 @@ namespace ASS_Bank_System
             #endregion
             #region Seeding
             modelBuilder.Entity<Branch>().HasData(
-                new Branch { Code = "B01", Name = "Main Branch", Address = "Cairo", PhoneNumber = "01242063325" },
+                new Branch { Code = "A01", Name = "Main Branch", Address = "Cairo", PhoneNumber = "01242063325" },
                 new Branch { Code = "Z02", Name = "Z02 Branch", Address = "Alex", PhoneNumber = "01023046981" }
-                );
+            );
 
             modelBuilder.Entity<Manager>().HasData(
-                new Manager { ManagerId = 1, FullName = "Ahmed", PhoneNumber = "01242063325", HireDate = DateTime.Now, BranchCode = "B01" },
-                new Manager { ManagerId = 2, FullName = "Mohamed", PhoneNumber = "01023046981", HireDate = DateTime.Now, BranchCode = "Z02" },
-                new Manager { ManagerId = 3, FullName = "Ali", PhoneNumber = "01142357535", HireDate = DateTime.Now, BranchCode = "A03" }
-                );
+                new Manager { ManagerId = 1, FullName = "Ahmed", Email = "Ahmed@mail.com", PhoneNumber = "01242063325", HireDate = new DateTime(2024, 1, 1), BranchCode = "A01" },
+                new Manager { ManagerId = 2, FullName = "Mohamed", Email = "Mohamed@mail.com", PhoneNumber = "01023046981", HireDate = new DateTime(2024, 1, 1), BranchCode = "Z02" }
+            );
+
+            modelBuilder.Entity<Customer>().HasData(
+                new Customer { CustomerId = 1, FullName = "Mona Mohamed", NationalId = "12345678901234", DateOfBirth = new DateTime(2000, 5, 10), Email = "mona@mail.com", PhoneNumber = "01012345678", Address = "Tanta", CustomerType = "Individual" }
+            );
+
+            modelBuilder.Entity<Account>().HasData(
+                new Account { AccountNumber = "A1001", CurrentBalance = 5000, AccountType = "Savings", OpeningDate = new DateTime(2024, 1, 1), BranchCode = "Z02" }
+            );
+
+            modelBuilder.Entity<CustomerAccount>().HasData(
+                new
+                {
+                    CustomerId = 1,
+                    AccountNumber = "A1001",
+                    OwnershipType = "Primary",
+                    OwnershipStartDate = new DateTime(2024, 1, 1),
+                    AccountStatus = "Active"
+                }
+            );           
             #endregion
 
         }
